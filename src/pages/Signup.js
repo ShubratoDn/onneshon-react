@@ -52,7 +52,7 @@ export default function Signup() {
                     //SUCCESS MESSAGE
                     // console.log(respData);
                     
-                    toast.success('🦄 Wow so easy!', {
+                    toast.success('🦄Register Success!', {
                         position: "bottom-center",
                         autoClose: 5000,
                         hideProgressBar: false,
@@ -62,7 +62,7 @@ export default function Signup() {
                         progress: undefined,
                         theme: "dark",
                     });
-
+                    
                     resetForm({ values: "" })
                 })
                 .catch((err) => {
