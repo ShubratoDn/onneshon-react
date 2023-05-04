@@ -76,11 +76,14 @@ export default function Signup() {
                         });
                     }
 
-
                     console.log(err)
-                    let keys = Object.keys(err)
-                    console.log(keys)
+                    let keys = Object.keys(err.response.data)
+                    console.log(err.response.data[keys])
 
+                    toast.error( err.response.data[keys], {
+                        position: "bottom-center",                            
+                        theme: "dark",
+                    });
                 })
                 .finally(() => {
                     //eta kaj korbei
