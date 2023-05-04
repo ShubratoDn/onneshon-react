@@ -66,7 +66,21 @@ export default function Signup() {
                     resetForm({ values: "" })
                 })
                 .catch((err) => {
+
+                    if(err.code === 'ERR_NETWORK') {
+                        // handle connection refused error
+                        console.log('Connection refused error');
+                        toast.error('Network error!! Conenction hoise na', {
+                            position: "bottom-center",                            
+                            theme: "dark",
+                        });
+                    }
+
+
                     console.log(err)
+                    let keys = Object.keys(err)
+                    console.log(keys)
+
                 })
                 .finally(() => {
                     //eta kaj korbei
@@ -112,8 +126,8 @@ export default function Signup() {
                 <form onSubmit={formik.handleSubmit} id='myForm' className="form-container border col-lg-6 m-auto p-4 my-5">
                     <h2 className='text-center'>Sign Up to ONNESHON</h2>
 
-                    {isloading && <div className='loading'>Loading the page</div>}
-                    <div className='loading'></div>
+                    {isloading && <div className='loading'></div>}
+                    
 
                     <hr className='my-3' />
                     <div id="input-container">

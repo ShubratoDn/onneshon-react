@@ -78,10 +78,81 @@ font-family: 'Nunito', sans-serif; */
 }
 
 .loading{
-    background-color: red;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(151, 149, 149);
+    border-radius: 20px;
     width: 100%;
-    height: 20px;
+    height: 100px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.loading::after{
+    content: "";
+    height: 50px;
+    width: 50px;
+    background-color: transparent;
+    position: absolute;
+    
+
+    border-radius: 50%;
+    border: 4px solid ;
+
+    border-top-right-radius: 10%;
+    border-bottom-left-radius: 10%;
+
+    border-top-color: red;
+    border-left-color: green;
+    border-bottom-color: royalblue;
+    border-right-color:  orangered;
+    
+    animation-name: round;
+    animation-duration: 2s;
+    /* animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); */
+    animation-iteration-count: infinite;
+    animation-direction:reverse;
+    /* animation-fill-mode: backwards; */
+}
+
+.loading::before{
+    content: "";
+    height: 50px;
+    width: 50px;
+    background-color: transparent;
+    position: absolute;
+    
+    border-radius: 50%;
+    border: 4px solid ;
+
+    border-top-right-radius: 10%;
+    border-bottom-left-radius: 10%;
+
+    border-top-color: red;
+    border-left-color: green;
+    border-bottom-color: royalblue;
+    border-right-color:  orangered;
+    
+    animation-name: round;
+    animation-duration: 2s;
+    /* animation-timing-function: linear; */
+    animation-iteration-count: infinite;
+    /* animation-direction:alternate; */
+    /* animation-fill-mode: forwards; */
+}
+
+
+@keyframes round {
+    0%{
+        transform: rotate(0deg) ;
+    }
+
+    100%{
+        transform: rotate(360deg) ;
+    }
+}
+
 
 
 
@@ -121,4 +192,5 @@ footer a:hover{
     padding: 10px ;
     background-color: var(--footer-ribbon);
 }
+
 
