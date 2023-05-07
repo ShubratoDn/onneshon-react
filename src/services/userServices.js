@@ -1,10 +1,12 @@
 import { axiosRequest } from "../utils/constants"
 
+
+//user Signup service
 export const userSignUp = async (data) => {
 
     let image = data.image;
-    console.log(image)
-    console.log("\n\n\n\n")
+    // console.log(image)
+    // console.log("\n\n\n\n")
 
     delete data.image;    
 
@@ -14,6 +16,17 @@ export const userSignUp = async (data) => {
 
 
     return await axiosRequest.post("/api/v1/auth/register", formData)
-        .then((resp) => resp.json);
+        .then((resp) => resp);
 
 }
+
+
+//user login service
+
+export const userLogin = async (loginDetails) =>{
+    // document.cookie = `jwt=${token}; HttpOnly; Secure`; 
+    return await axiosRequest.post("/api/v1/auth/login", loginDetails)
+                    .then((response)=> response.data)
+                    
+                }
+                

@@ -154,8 +154,13 @@ font-family: 'Nunito', sans-serif; */
 }
 
 
+.loading + #input-container{
+    display: none;
+}
 
-
+#input-container{
+    display: block;
+}
 
 
 /* footer design starts */
