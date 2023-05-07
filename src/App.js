@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import UserDashboard from './pages/user-route/UserDashboard';
 import UserPrivateGate from './pages/user-route/UserPrivateGate';
+import ErrorPage from './pages/ErrorPage';
 
 function App() {
     return (
@@ -43,8 +44,8 @@ function App() {
                         <Route path='dashboard' element={<UserDashboard></UserDashboard>}></Route>
                     </Route>
 
-                    {/* <Route path='/blogs/:title/:id' element={<Blog></Blog>} ></Route>
-                <Route path='*' element={<ErrorPage></ErrorPage>}></Route> */}
+                    <Route path='*' element={<ErrorPage></ErrorPage>}></Route>
+                    {/* <Route path='/blogs/:title/:id' element={<Blog></Blog>} ></Route> */}
                 </Routes>
             </BrowserRouter>
         </>

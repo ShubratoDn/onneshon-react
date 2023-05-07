@@ -1,12 +1,11 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
+import Login from '../Login';
 
-export default function UserPrivateGate() {
-    return (
-        <div>
-            <h1>This is dashboard</h1>
-            <Outlet></Outlet>
+const UserPrivateGate =()=> {
+    let isLoggedIn = true;
 
-        </div>
-    )
+    return isLoggedIn ?  <Outlet></Outlet> : <Navigate to={"/login"}></Navigate>;
 }
+
+export default UserPrivateGate;
