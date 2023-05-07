@@ -1,8 +1,15 @@
 import React from 'react'
+import Base from '../../components/Base'
 
 function UserDashboard () {
   return (
-    <div>This is user Dashboard</div>
+    <Base>
+        <div className="container">
+
+            <h1>This is USER DASHBOARD</h1>
+
+        </div>
+    </Base>
   )
 }
 

@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 
 
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { ToastContainer } from 'react-toastify'
 
 import Home from "./pages/Home";
@@ -41,6 +41,7 @@ function App() {
                     <Route path='/signup' element={<Signup></Signup>}></Route>
 
                     <Route path='/user' element={<UserPrivateGate></UserPrivateGate>}>
+                        <Route path="" element={<Navigate to="/user/dashboard"/>} />
                         <Route path='dashboard' element={<UserDashboard></UserDashboard>}></Route>
                     </Route>
 

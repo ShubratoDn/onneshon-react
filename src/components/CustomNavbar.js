@@ -15,6 +15,7 @@ import {
     DropdownMenu,
     DropdownItem,
     NavbarText,
+    Container,
 } from 'reactstrap';
 
 function CustomNavbar(args) {
@@ -26,7 +27,9 @@ function CustomNavbar(args) {
         <div>
             <Navbar color='dark' dark={true} expand="md">
 
-                <NavbarBrand><img src={Logo} id='logo' alt="Logo" />Onneshon</NavbarBrand>
+
+
+                <NavbarBrand tag={ReactNavLink} to="/home"><img src={Logo} id='logo' alt="Logo" />Onneshon</NavbarBrand>
 
                 <NavbarToggler onClick={toggle} />
 
@@ -58,7 +61,14 @@ function CustomNavbar(args) {
                         </UncontrolledDropdown>
                     </Nav>
 
-
+                    <Nav navbar>
+                        <NavItem>
+                            <NavLink tag={ReactNavLink} to='/login' >Login </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink tag={ReactNavLink} to='/signup' >Sign Up</NavLink>
+                        </NavItem>
+                    </Nav>
 
                 </Collapse>
             </Navbar>

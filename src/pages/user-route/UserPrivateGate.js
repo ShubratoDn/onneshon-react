@@ -1,9 +1,9 @@
 import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
-import Login from '../Login';
+import { isUserLoggedIn } from '../../services/auth';
 
 const UserPrivateGate =()=> {
-    let isLoggedIn = true;
+    let isLoggedIn = isUserLoggedIn();
 
     return isLoggedIn ?  <Outlet></Outlet> : <Navigate to={"/login"}></Navigate>;
 }
