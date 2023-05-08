@@ -27,7 +27,7 @@ export const isUserLoggedIn = () =>{
 
 //get current user info
 export const getCurrentUserInfo = ()=>{
-    if(isUserLoggedIn){
+    if(isUserLoggedIn()){
         let data = JSON.parse(localStorage.getItem("data")).user;
         return data;
     }else{

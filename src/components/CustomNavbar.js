@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink as ReactNavLink } from 'react-router-dom';
 
 import Logo from "../assets/images/logo.png";
@@ -14,20 +14,31 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
-    NavbarText,
-    Container,
 } from 'reactstrap';
 
-function CustomNavbar(args) {
-    const [isOpen, setIsOpen] = useState(false);
+import { getCurrentUserInfo, isUserLoggedIn } from '../services/auth';
 
+function CustomNavbar(args) {
+
+    //navbar er jonno...automatic
+    const [isOpen, setIsOpen] = useState();
     const toggle = () => setIsOpen(!isOpen);
+
+
+    const [isLoggedin, setLoggedIn] = useState(false);
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        setLoggedIn(isUserLoggedIn());
+        if (isUserLoggedIn()) {
+            setUser(getCurrentUserInfo());
+            console.log(user)
+        }
+    }, [isUserLoggedIn()])
 
     return (
         <div>
             <Navbar color='dark' dark={true} expand="md">
-
-
 
                 <NavbarBrand tag={ReactNavLink} to="/home"><img src={Logo} id='logo' alt="Logo" />Onneshon</NavbarBrand>
 
@@ -41,12 +52,6 @@ function CustomNavbar(args) {
                         </NavItem>
                         <NavItem>
                             <NavLink tag={ReactNavLink} to='/about' >About Us</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink tag={ReactNavLink} to='/signup' >Sign Up</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink tag={ReactNavLink} to='/login' >Login</NavLink>
                         </NavItem>
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret>
@@ -62,12 +67,31 @@ function CustomNavbar(args) {
                     </Nav>
 
                     <Nav navbar>
-                        <NavItem>
-                            <NavLink tag={ReactNavLink} to='/login' >Login </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink tag={ReactNavLink} to='/signup' >Sign Up</NavLink>
-                        </NavItem>
+
+                        {isLoggedin && (
+                            <>
+                                <NavItem>
+                                    <NavLink tag={ReactNavLink} to='/Home' >{user.name} </NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={ReactNavLink} to='/logout' >Logout </NavLink>
+                                </NavItem>
+                            </>
+                        )}
+
+                        {
+                            !isLoggedin && (
+                                <>
+                                    <NavItem>
+                                        <NavLink tag={ReactNavLink} to='/login' >Login </NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink tag={ReactNavLink} to='/signup' >Sign Up</NavLink>
+                                    </NavItem>
+                                </>
+                            )
+                        }
+
                     </Nav>
 
                 </Collapse>
