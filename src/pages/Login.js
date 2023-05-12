@@ -7,11 +7,13 @@ import { toast } from 'react-toastify'
 
 import { userLogin } from '../services/userServices'
 import { doLogin, getCurrentUserInfo } from '../services/auth'
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
 
     const [isLoading, setIsLoading] = useState(false);
 
+    const navigate = useNavigate();
 
     const formik = useFormik({
         initialValues: {
@@ -32,8 +34,10 @@ function Login() {
                 .then((respData) => {
                     // console.log(respData)
 
+                    //after logged in success full
                     doLogin(respData,()=>{
-                        console.log("Logged in successfully " )
+                        console.log("Logged in successfully " );
+                        navigate("/user/dashboard")
                     })
 
                     console.log(getCurrentUserInfo())

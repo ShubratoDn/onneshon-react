@@ -16,7 +16,7 @@ import {
     DropdownItem,
 } from 'reactstrap';
 
-import { getCurrentUserInfo, isUserLoggedIn } from '../services/auth';
+import { doLogout, getCurrentUserInfo, isUserLoggedIn } from '../services/auth';
 
 function CustomNavbar(args) {
 
@@ -34,7 +34,16 @@ function CustomNavbar(args) {
             setUser(getCurrentUserInfo());
             console.log(user)
         }
-    }, [isUserLoggedIn()])
+    }, [isLoggedin])
+
+
+    const logout = ()=>{
+        doLogout(()=>{
+            setLoggedIn(false);
+        });
+    }
+
+
 
     return (
         <div>
@@ -74,7 +83,7 @@ function CustomNavbar(args) {
                                     <NavLink tag={ReactNavLink} to='/Home' >{user.name} </NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={ReactNavLink} to='/logout' >Logout </NavLink>
+                                    <NavLink onClick={()=>logout()}>Logout </NavLink>
                                 </NavItem>
                             </>
                         )}
