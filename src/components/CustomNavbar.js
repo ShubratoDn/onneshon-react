@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink as ReactNavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Logo from "../assets/images/logo.png";
 import {
@@ -20,7 +21,10 @@ import { doLogout, getCurrentUserInfo, isUserLoggedIn } from '../services/auth';
 
 function CustomNavbar(args) {
 
-    //navbar er jonno...automatic
+    const navigate = useNavigate();
+
+
+    //navbar er jonno...automatic code generate hoiche
     const [isOpen, setIsOpen] = useState();
     const toggle = () => setIsOpen(!isOpen);
 
@@ -37,12 +41,19 @@ function CustomNavbar(args) {
     }, [isLoggedin])
 
 
-    const logout = ()=>{
-        doLogout(()=>{
-            setLoggedIn(false);
-        });
-    }
+    // const logout = ()=>{
+    //     doLogout(()=>{
+    //         setLoggedIn(false);
+    //         navigate("/home");
+    //     });
+    // }
 
+    const logout = () => {
+        doLogout()
+            .then(() => {
+                navigate("/home");
+            });
+    };
 
 
     return (
@@ -80,10 +91,10 @@ function CustomNavbar(args) {
                         {isLoggedin && (
                             <>
                                 <NavItem>
-                                    <NavLink tag={ReactNavLink} to='/Home' >{user.name} </NavLink>
+                                    <NavLink tag={ReactNavLink} to='/user/dashboard' >{user.name} </NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink onClick={()=>logout()}>Logout </NavLink>
+                                    <NavLink tag={ReactNavLink} onClick={() => logout()}>Logout </NavLink>
                                 </NavItem>
                             </>
                         )}

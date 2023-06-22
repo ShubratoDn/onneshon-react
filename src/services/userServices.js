@@ -22,7 +22,6 @@ export const userSignUp = async (data) => {
 
 
 //user login service
-
 export const userLogin = async (loginDetails) =>{
     // document.cookie = `jwt=${token}; HttpOnly; Secure`; 
     return await axiosRequest.post("/api/v1/auth/login", loginDetails)

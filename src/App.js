@@ -13,6 +13,10 @@ import Signup from './pages/Signup';
 import UserDashboard from './pages/user-route/UserDashboard';
 import UserPrivateGate from './pages/user-route/UserPrivateGate';
 import ErrorPage from './pages/ErrorPage';
+import WriteBlog from './pages/blog-route/WriteBlog';
+import BlogPirvateGate from './pages/blog-route/BlogPirvateGate';
+import Blog from './pages/Blog';
+import ProtectedBlogRoute from './pages/blog-route/BlogPirvateGate';
 
 function App() {
     return (
@@ -43,6 +47,13 @@ function App() {
                     <Route path='/user' element={<UserPrivateGate></UserPrivateGate>}>
                         <Route path="" element={<Navigate to="/user/dashboard"/>} />
                         <Route path='dashboard' element={<UserDashboard></UserDashboard>}></Route>
+                    </Route>
+
+                    <Route path='/blog' element={<ProtectedBlogRoute></ProtectedBlogRoute>}>
+                        {/* <Route path='' element={<Navigate to='/home'></Navigate>}></Route> */}
+                        <Route path='' element={<Blog></Blog>}></Route>
+                        <Route path="/blog/:blogId" element={<Blog/>} />
+                        <Route path='write-blog' element={<WriteBlog></WriteBlog>}></Route>
                     </Route>
 
                     <Route path='*' element={<ErrorPage></ErrorPage>}></Route>

@@ -1,37 +1,55 @@
 
 
 //for setting user data
-export const doLogin = (data, next) =>{
-    localStorage.setItem("data",JSON.stringify(data));
+export const doLogin = (data, next) => {
+    localStorage.setItem("data", JSON.stringify(data));
     next();
 }
 
 
 //for logout
-export const doLogout = (next) =>{
+    /** EI CODE TA USE KORLE navigate() eta kaj kortesilo na  */
+// export const doLogout = (next) =>{
+//     localStorage.removeItem("data");
+//     next();
+// }
+
+export const doLogout = () => {
     localStorage.removeItem("data");
-    next();
-}
+    return new Promise((resolve, reject) => {
+        resolve();
+    });
+};
+
 
 
 //check if login or not
-export const isUserLoggedIn = () =>{
+export const isUserLoggedIn = () => {
     let data = localStorage.getItem("data");
-    if(data != null){
+    if (data != null) {
         return true;
-    }else{
+    } else {
         return false;
     }
 }
 
 
 //get current user info
-export const getCurrentUserInfo = ()=>{
-    if(isUserLoggedIn()){
+export const getCurrentUserInfo = () => {
+    if (isUserLoggedIn()) {
         let data = JSON.parse(localStorage.getItem("data")).user;
         return data;
-    }else{
+    } else {
         return null;
     }
 }
 
+
+export const getToken =()=>{
+    if (isUserLoggedIn()) {
+        let data = JSON.parse(localStorage.getItem("data")).token;
+        return data;
+    } else {
+        return null;
+    }
+}

@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora&family=Nunito&display=swap');
 
-:root{
+:root {
     --footer-bg: #282827;
     --footer-ribbon: #211F1F;
 }
 
-body{
+body {
     /* background-color: red !important; */
     color: red;
     font-family: 'Nunito', sans-serif;
@@ -16,25 +16,25 @@ body{
 
 /* REUSABLE */
 
-ul{
+ul {
     padding: 0 !important;
     display: flex;
     flex-direction: column;
 }
 
-ul li{
-    list-style-type: none;       
+ul li {
+    list-style-type: none;
 }
 
-ul li a{
-    text-decoration: none;    
+ul li a {
+    text-decoration: none;
     padding: 10px;
     display: block;
 }
 
-.fa-white{
+.fa-white {
     color: white;
-    margin-right: 10px ;
+    margin-right: 10px;
 }
 
 /* REUSABLE Ends*/
@@ -46,38 +46,38 @@ font-family: 'Nunito', sans-serif; */
 
 
 /* NAVBAR DESIGN */
-#logo{
+#logo {
     height: 60px;
     padding: 5px;
 }
 
 
-.navbar-nav{
+.navbar-nav {
     font-size: 14px;
 }
 
 
-.form-container input{
+.form-container input {
     font-size: 14px;
 }
 
-.input-group{
+.input-group {
     flex-wrap: wrap;
 }
 
-.invalid-field{
+.invalid-field {
     color: #e90e21;
     /* background-color: #f8d7da;    */
     /* border: 1px solid #f5c2c7 ; */
     border-radius: 4px;
     padding-top: 5px;
     padding-left: 5px;
-        display: block !important;
+    display: block !important;
     width: 100%;
     font-size: 12px;
 }
 
-.loading{
+.loading {
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(151, 149, 149);
     border-radius: 20px;
@@ -89,16 +89,16 @@ font-family: 'Nunito', sans-serif; */
     align-items: center;
 }
 
-.loading::after{
+.loading::after {
     content: "";
     height: 50px;
     width: 50px;
     background-color: transparent;
     position: absolute;
-    
+
 
     border-radius: 50%;
-    border: 4px solid ;
+    border: 4px solid;
 
     border-top-right-radius: 10%;
     border-bottom-left-radius: 10%;
@@ -106,25 +106,25 @@ font-family: 'Nunito', sans-serif; */
     border-top-color: red;
     border-left-color: green;
     border-bottom-color: royalblue;
-    border-right-color:  orangered;
-    
+    border-right-color: orangered;
+
     animation-name: round;
     animation-duration: 2s;
     /* animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); */
     animation-iteration-count: infinite;
-    animation-direction:reverse;
+    animation-direction: reverse;
     /* animation-fill-mode: backwards; */
 }
 
-.loading::before{
+.loading::before {
     content: "";
     height: 50px;
     width: 50px;
     background-color: transparent;
     position: absolute;
-    
+
     border-radius: 50%;
-    border: 4px solid ;
+    border: 4px solid;
 
     border-top-right-radius: 10%;
     border-bottom-left-radius: 10%;
@@ -132,8 +132,8 @@ font-family: 'Nunito', sans-serif; */
     border-top-color: red;
     border-left-color: green;
     border-bottom-color: royalblue;
-    border-right-color:  orangered;
-    
+    border-right-color: orangered;
+
     animation-name: round;
     animation-duration: 2s;
     /* animation-timing-function: linear; */
@@ -144,27 +144,173 @@ font-family: 'Nunito', sans-serif; */
 
 
 @keyframes round {
-    0%{
-        transform: rotate(0deg) ;
+    0% {
+        transform: rotate(0deg);
     }
 
-    100%{
-        transform: rotate(360deg) ;
+    100% {
+        transform: rotate(360deg);
     }
 }
 
 
-.loading + #input-container{
+.loading+#input-container {
     display: none;
 }
 
-#input-container{
+#input-container {
     display: block;
 }
 
 
+
+
+/* ==================================== */
+
+.user-page {
+    background-image: url("../images/userBackground.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: top top;
+    min-height: 50vh;
+    padding: 20px 0;
+}
+
+.user-page-info {
+    border: 1px solid rgb(166, 204, 204);
+    min-height: 10px;
+    /* margin: 20px 0; */
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.418);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+.user-page-info img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-blogs-section {
+    border: 1px solid rgb(166, 204, 204);
+    margin-top: 40px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.418);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+
+
+
+/* BLog Card design */
+.blog-card {
+    border: 1px solid rgba(0, 60, 255, 0.377);
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.blog-card-img{
+    width: 100%;
+    height: 200px;
+    min-height: 200px;
+    min-width: 100%;
+    object-fit: cover;
+    background-color: rgb(104, 96, 96);
+}
+
+.blog-category{
+    background: linear-gradient(to bottom, #6496DC 30% , #59BDF4 70%);
+    margin-bottom: 5px;
+    display: block;
+    width: fit-content;
+    padding: 2px 5px;
+    font-size: 12px;
+    border-radius: 2px;
+    color: white;
+}
+
+.blog-card .blog-title{
+    font-size: 20px;
+    color: black;
+}
+
+.blog-card .blog-content{
+    font-size: 14px !important;
+}
+
+.blog-card .blog-content p,
+.blog-card .blog-content h1,
+.blog-card .blog-content h2,
+.blog-card .blog-content h3,
+.blog-card .blog-content h4,
+.blog-card .blog-content h5,
+.blog-card .blog-content h6 {
+  font-size: inherit;
+}
+
+.blog-card-auth{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+
+.blog-card-auth img{
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.blog-card-auth span{
+    display: block;
+    line-height: 40px;
+}
+
+
+
+
+
+/* blog page design starts */
+.comment-card{
+    border: 1px solid rgba(0, 0, 0, 0.26);
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.comment-card .author-info img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;    
+    object-fit: cover;
+}
+
+.comment-card .author-info{
+    color: black;
+    text-decoration: none;
+}
+
+.comment-card .author-info:hover{
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+
 /* footer design starts */
-footer{
+footer {
     background-color: #282827;
     color: rgb(201, 197, 197);
     padding: 10px 0;
@@ -172,18 +318,18 @@ footer{
     font-size: 14px;
 }
 
-footer a{
+footer a {
     color: rgb(201, 197, 197);
     background-color: transparent;
     transition: .5s color, .3s background-color;
 }
 
-footer a:hover{
+footer a:hover {
     background-color: rgba(223, 221, 221, 0.055);
     color: white;
 }
 
-.foot-heading{
+.foot-heading {
     font-size: 22px;
     font-weight: bolder;
     letter-spacing: 1px;
@@ -191,11 +337,9 @@ footer a:hover{
     color: white;
 }
 
-.footer-ribon{
+.footer-ribon {
     display: flex;
     justify-content: space-between;
-    padding: 10px ;
+    padding: 10px;
     background-color: var(--footer-ribbon);
 }
-
-

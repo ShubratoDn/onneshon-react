@@ -3,7 +3,7 @@ import { isUserLoggedIn } from '../../services/auth';
 import { Navigate, Outlet } from 'react-router-dom';
 import {toast} from'react-toastify'
 
-function UserPrivateGate() {
+const BlogPrivateGate =()=> {
     let isLoggedIn = isUserLoggedIn();
 
     useEffect(() => {
@@ -19,6 +19,10 @@ function UserPrivateGate() {
 }
 
 
-export default UserPrivateGate;
-
-
+//NORMAL VABE KORLEO HOBE
+// Higher-level component or route that ensures BlogPrivateGate is rendered only once
+const ProtectedBlogRoute = () => {
+    return <BlogPrivateGate />;
+  };
+  
+export default ProtectedBlogRoute;
