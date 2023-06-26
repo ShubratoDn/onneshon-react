@@ -14,10 +14,11 @@ import {
     UncontrolledDropdown,
     DropdownToggle,
     DropdownMenu,
-    DropdownItem,
+    DropdownItem
 } from 'reactstrap';
 
 import { doLogout, getCurrentUserInfo, isUserLoggedIn } from '../services/auth';
+import SearchBar from './SearchBar';
 
 function CustomNavbar(args) {
 
@@ -41,14 +42,8 @@ function CustomNavbar(args) {
     }, [isLoggedin])
 
 
-    // const logout = ()=>{
-    //     doLogout(()=>{
-    //         setLoggedIn(false);
-    //         navigate("/home");
-    //     });
-    // }
-
     const logout = () => {
+        setLoggedIn(false);        
         doLogout()
             .then(() => {
                 navigate("/home");
@@ -84,6 +79,9 @@ function CustomNavbar(args) {
                                 <DropdownItem>Reset</DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
+                    </Nav>
+                    <Nav className='mx-lg-auto w-50'>
+                        <SearchBar></SearchBar>
                     </Nav>
 
                     <Nav navbar>

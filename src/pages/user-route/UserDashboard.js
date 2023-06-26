@@ -1,34 +1,66 @@
 import React, { useEffect, useState } from 'react'
 import Base from '../../components/Base'
 import { getCurrentUserInfo } from '../../services/auth'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { getBlogsByUserId } from '../../services/blogServices';
 import { BASE_URL } from '../../utils/constants';
+import { getUserById } from '../../services/userServices';
 
 
 function UserDashboard() {
 
     const [user, setUser] = useState([]);
     const [userBlogs, setUserBlogs] = useState([]);
+    const [myAccount, setMyAccount] = useState(false);
+
+    /** VVI */
+    //from request param
+    const { userId } = useParams();
+    const location = useLocation();
 
     useEffect(() => {
-        const fetchData = async () => {
-            //first a user Data asbe and ONLY THEN getBlogsByUserId() eta jeno kaj kore. Noile ID pabo na user er
+        const fetchData = async () => {            
             const userInfo = getCurrentUserInfo();
-            setUser(userInfo);
+            
+            let userIdInt = Number.parseInt(userId)  
 
-            if (userInfo && userInfo.id) {
-                const blogs = await getBlogsByUserId(userInfo.id);
-                setUserBlogs(blogs);
+            if (userId) {
+                
+                // *** ONEK IMPORTANT (Feedback given at last moment of the project)
+                const fetchedUser = await getUserById(userIdInt)
+                                        .then(data=>setUser(data))
+                                        .catch((err)=>setUser([]))
+                // setUser(fetchedUser);
+                
+                //first a user Data asbe and ONLY THEN getBlogsByUserId() eta jeno kaj kore. Noile ID pabo na user er
+                const blogs = await getBlogsByUserId(userIdInt);
+                setUserBlogs(blogs);                
+
+            } else {
+                setUser(userInfo);
+                if (userInfo && userInfo.id) {
+                    const blogs = await getBlogsByUserId(userInfo.id);
+                    setUserBlogs(blogs);
+                }
             }
+
+            if(userInfo.id === userIdInt){
+                setMyAccount(true)
+            }else{
+                setMyAccount(false)
+            }
+
         };
 
         fetchData();
-
-    }, []);
-
+    }, [userId, location.pathname]);
 
 
+    if(user.length  == 0){
+        return (<Base>
+            <div className='display-3 text-center text-danger'>User Not Found</div>
+        </Base>)
+    }
     return (
         <Base>
             <div className="user-page">
@@ -117,34 +149,32 @@ function UserDashboard() {
 
 
                                         return <div key={blog.id} className="col-lg-4 mb-3">
+
                                             <div className="blog-card">
                                                 <div>
                                                     {/* <img src={userImage} alt="Blog" className="blog-card-img" /> */}
                                                     <img src={BASE_URL + "/BlogImages/" + blog.blogImage} alt="Blog" className="blog-card-img" />
-                                                    <Link to="/home" className="p-2 text-decoration-none d-block">
+                                                    <Link to={"/blog/" + blog.id} className="p-2 text-decoration-none d-block">
                                                         <div className='d-flex justify-content-between'>
                                                             <span className='blog-category'>{blog.category.categoryTitle}</span>
-                                                            <span><i className="fa-regular fa-comments"></i> 10</span>
+                                                            <span><i className="fa-regular fa-comments me-2"></i>{blog.comments.length}</span>
                                                         </div>
                                                         <div className='blog-details'>
                                                             <div className="blog-title">{blog.blogTitle}</div>
                                                             <div dangerouslySetInnerHTML={{ __html: truncatedContent }} className='blog-content text-muted'>
-
-                                                                {/* {truncatedContent} */}
-                                                                {/* <strong>...Read more</strong> */}
                                                             </div>
                                                         </div>
                                                     </Link>
                                                     {/* <Link to="/home" className='stretched-link'></Link> */}
                                                 </div>
 
-                                                <div className="blog-card-auth p-2">
+                                                <Link to={"/user/"+blog.user.id} className="blog-card-auth p-2 text-decoration-none text-dark">
                                                     <div>
                                                         <img src={BASE_URL + "/UserImages/" + blog.user.image} alt="User" />
                                                         {blog.user.name}
                                                     </div>
                                                     <span>{formattedDateWithSuffix}</span>
-                                                </div>
+                                                </Link>
                                             </div>
                                         </div>
                                     })

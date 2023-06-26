@@ -23,7 +23,7 @@ export default function WriteBlog() {
         },
         validationSchema: yup.object({
             blogTitle: yup.string().required("Insert Blog Title").min(4, "Minumum 4 character needed"),
-            blogContent: yup.string().required("Insert Blog Content").min(10, "Write something more..."),
+            blogContent: yup.string().required("Insert Blog Content").min(10, "Write something more...").max(5000,"Maximum 5000 character"),
             categoryId: yup.number().required("Select category").typeError("Enter a valid category").required("Select a category").positive("Select a valid category"),
             blogImage: yup.mixed().required("Insert image").test('fileSize', 'Maximum 5 mb', (value) => {
                 return value ? value.size <= 5000000 : true;

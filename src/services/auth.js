@@ -1,5 +1,4 @@
 
-
 //for setting user data
 export const doLogin = (data, next) => {
     localStorage.setItem("data", JSON.stringify(data));
@@ -14,8 +13,10 @@ export const doLogin = (data, next) => {
 //     next();
 // }
 
+// const nav = useNavigate();
 export const doLogout = () => {
     localStorage.removeItem("data");
+    // window.location.href = "/home";
     return new Promise((resolve, reject) => {
         resolve();
     });

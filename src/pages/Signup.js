@@ -99,10 +99,14 @@ export default function Signup() {
     });
 
 
-    //AMAR CODE TA one keypress SLOW te run hocchilo
+    //1 key press Slow kaj kortechilo tai
+    // UseEffect to manually trigger the validation after the user enters a new value
     useEffect(() => {
-        formik.validateForm();
-    }, [formik.values])
+        if (Object.keys(formik.touched).length > 0) {
+            formik.validateForm();
+        }
+    }, [formik.touched]);
+
 
 
 
