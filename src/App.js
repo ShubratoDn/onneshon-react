@@ -20,9 +20,7 @@ import Blog from './pages/Blog';
 function App() {
     return (
         <>
-
             <BrowserRouter>
-
                 <ToastContainer
                     position="bottom-center"
                     autoClose={5000}

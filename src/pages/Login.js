@@ -49,7 +49,7 @@ function Login() {
                 .catch((err) => {
                     if (err.code === 'ERR_NETWORK') {
                         // handle connection refused error
-                        toast.error('Network error!! Conenction hoise na', {
+                        toast.error('Network error!! Conenction hoise na' + JSON.stringify(err), {
                             position: "bottom-center",
                             theme: "dark",
                         });
@@ -80,9 +80,17 @@ function Login() {
     }
 
 
+    // useEffect(() => {
+    //     formik.validateForm()
+    // }, [formik.values])
+    //1 key press Slow kaj kortechilo tai
+    // UseEffect to manually trigger the validation after the user enters a new value
     useEffect(() => {
-        formik.validateForm()
-    }, [formik.values])
+        if (Object.keys(formik.touched).length > 0) {
+            formik.validateForm();
+        }
+    }, [formik.touched]);
+
 
 
 

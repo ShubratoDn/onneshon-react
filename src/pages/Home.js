@@ -6,7 +6,6 @@ import NewFeedInfinite from '../components/NewFeedInfinite'
 const Home = () => {
     return (
         <Base>
-
             <div className='container mt-3'>
                 <div className="row">
                     <div className="col-lg-2"></div>
