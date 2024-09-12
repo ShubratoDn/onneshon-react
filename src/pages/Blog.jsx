@@ -14,7 +14,7 @@ function Blog() {
     const [comment, setComment] = useState("");
     const [commentStateChange, setCommentStateChange] = useState(1);
 
-    const nav =useNavigate();
+    const nav = useNavigate();
     const handleChange = (e) => {
         setComment(e.target.value);
     }
@@ -35,14 +35,14 @@ function Blog() {
                         theme: "dark",
                     });
                     setComment("");
-                    setCommentStateChange(commentStateChange+1)
+                    setCommentStateChange(commentStateChange + 1)
                     console.log(data)
                     console.log("value is " + commentStateChange)
                 })
                 .catch((err) => {
                     console.log(err.response)
-                    if(err.response.status === 403){
-                        doLogout();                        
+                    if (err.response.status === 403) {
+                        doLogout();
                         nav("/login");
                     }
                 })
@@ -54,7 +54,7 @@ function Blog() {
         const number = parseInt(blogId, 10);
         if (!Number.isNaN(number)) {
             getBlogByBlogId(blogId)
-                .then((data) => {                    
+                .then((data) => {
                     setBlog(data)
                 })
                 .catch((err) => {
@@ -62,8 +62,7 @@ function Blog() {
                     setError("Blog Not Found");
                 })
         } else {
-            // console.log("Not  A NUMBER")
-            setError("Don't play with URL");
+            setError("Error! 404 not found! \n Don't play with URL");
         }
 
     }, [blogId, commentStateChange])
@@ -132,7 +131,7 @@ function Blog() {
                 <div className='col-lg-8'>
                     <div className="blog">
                         {/* blog image */}
-                        <div className="blog-image"><img className='card-img rounded mb-2' src={BASE_URL + "/BlogImages/" + blog.blogImage} alt="BLog " /></div>
+                        {blog.blogImage && <div className="blog-image"><img className='card-img rounded mb-2' src={BASE_URL + "/BlogImages/" + blog.blogImage} alt="BLog " /></div>}
                         <p className='display-6 blog-title'>{blog.blogTitle}</p>
                         <div className='d-flex my-3'>
                             <span className='blog-category me-4'>{blog.category.categoryTitle}</span>
@@ -142,7 +141,7 @@ function Blog() {
                             </div>
                         </div>
                         {/* author info */}
-                        <Link to={"/user/"+blog.user.id} className="blog-card-auth p-2 text-decoration-none text-dark">
+                        <Link to={"/user/" + blog.user.id} className="blog-card-auth p-2 text-decoration-none text-dark">
                             <div>
                                 <img src={BASE_URL + "/UserImages/" + blog.user.image} alt="User" />
                                 {blog.user.name}

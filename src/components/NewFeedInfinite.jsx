@@ -21,9 +21,9 @@ function NewFeedInfinite() {
         getAllBlogs(page, 0)
             .then((data) => {
                 setData(data)
-                if(blogs == null){
+                if (blogs == null) {
                     setBlogs(data.content)
-                }else{
+                } else {
                     setBlogs((prevBlogs) => [...prevBlogs, ...data.content]);
                 }
                 setError(null);
@@ -49,7 +49,7 @@ function NewFeedInfinite() {
 
     const fetchData = () => {
         console.log("Req for next data")
-        setPage((prevPage) => prevPage + 1)        
+        setPage((prevPage) => prevPage + 1)
     }
 
 
@@ -67,10 +67,25 @@ function NewFeedInfinite() {
 
             >
                 {blogs.map((blog) => {
-                    //maximum content legth 100
-                    const truncatedContent = blog.blogContent.length > 100
-                        ? blog.blogContent.substring(0, 100) + "...Read More"
-                        : blog.blogContent;
+
+                    // Function to extract text content from HTML
+                    const extractTextFromHTML = (html) => {
+                        // Create a temporary DOM element
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = html;
+
+                        // Extract and return the text content
+                        return tempDiv.textContent || tempDiv.innerText || '';
+                    };
+
+                    // Extract text from the blog content
+                    const fullText = extractTextFromHTML(blog.blogContent);
+                    // Slice the first 100 characters of the text
+                    const truncatedContent = fullText.length > 100 ?
+                        fullText.slice(0, 100) + "...Read More" :
+                        fullText;
+
+
 
                     //Date formating
                     const addedDate = new Date(blog.addedDate);
@@ -105,8 +120,8 @@ function NewFeedInfinite() {
                         <div key={blog.id} className="mb-3">
                             <div className="blog-card">
                                 <div>
-                                    {/* <img src={userImage} alt="Blog" className="blog-card-img" /> */}
-                                    <img style={{ minHeight: "300px", height: "320px" }} src={BASE_URL + "/BlogImages/" + blog.blogImage} alt="Blog" className="blog-card-img" />
+
+                                    {blog.blogImage && <img style={{ minHeight: "300px", height: "320px" }} src={BASE_URL + "/BlogImages/" + blog.blogImage} alt="Blog" className="blog-card-img" />}
                                     <Link to={"/blog/" + blog.id} className="p-2 text-decoration-none d-block">
                                         <div className='d-flex justify-content-between'>
                                             <span className='blog-category'>{blog.category.categoryTitle}</span>
@@ -120,7 +135,7 @@ function NewFeedInfinite() {
                                     {/* <Link to="/home" className='stretched-link'></Link> */}
                                 </div>
 
-                                <Link to={"/user/"+blog.user.id} className="blog-card-auth p-2 text-decoration-none text-dark">
+                                <Link to={"/user/" + blog.user.id} className="blog-card-auth p-2 text-decoration-none text-dark">
                                     <div>
                                         <img src={BASE_URL + "/UserImages/" + blog.user.image} alt="User" />
                                         {blog.user.name}

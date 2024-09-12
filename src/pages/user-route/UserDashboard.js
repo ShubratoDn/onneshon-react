@@ -19,22 +19,22 @@ function UserDashboard() {
     const location = useLocation();
 
     useEffect(() => {
-        const fetchData = async () => {            
+        const fetchData = async () => {
             const userInfo = getCurrentUserInfo();
-            
-            let userIdInt = Number.parseInt(userId)  
+
+            let userIdInt = Number.parseInt(userId)
 
             if (userId) {
-                
+
                 // *** ONEK IMPORTANT (Feedback given at last moment of the project)
                 const fetchedUser = await getUserById(userIdInt)
-                                        .then(data=>setUser(data))
-                                        .catch((err)=>setUser([]))
+                    .then(data => setUser(data))
+                    .catch((err) => setUser([]))
                 // setUser(fetchedUser);
-                
+
                 //first a user Data asbe and ONLY THEN getBlogsByUserId() eta jeno kaj kore. Noile ID pabo na user er
                 const blogs = await getBlogsByUserId(userIdInt);
-                setUserBlogs(blogs);                
+                setUserBlogs(blogs);
 
             } else {
                 setUser(userInfo);
@@ -44,9 +44,9 @@ function UserDashboard() {
                 }
             }
 
-            if(userInfo.id === userIdInt){
+            if (userInfo.id === userIdInt) {
                 setMyAccount(true)
-            }else{
+            } else {
                 setMyAccount(false)
             }
 
@@ -56,7 +56,7 @@ function UserDashboard() {
     }, [userId, location.pathname]);
 
 
-    if(user.length  == 0){
+    if (user.length == 0) {
         return (<Base>
             <div className='display-3 text-center text-danger'>User Not Found</div>
         </Base>)
@@ -111,10 +111,23 @@ function UserDashboard() {
                             <div className="row">
                                 {
                                     userBlogs && userBlogs.content && userBlogs.content.length === 0 ? <h1 className='text-muted'>No blogs found for this users</h1> : userBlogs.content && userBlogs.content.map((blog) => {
-                                        //maximum content legth 100
-                                        const truncatedContent = blog.blogContent.length > 100
-                                            ? blog.blogContent.substring(0, 100) + "...Read More"
-                                            : blog.blogContent;
+
+                                        // Function to extract text content from HTML
+                                        const extractTextFromHTML = (html) => {
+                                            // Create a temporary DOM element
+                                            const tempDiv = document.createElement('div');
+                                            tempDiv.innerHTML = html;
+
+                                            // Extract and return the text content
+                                            return tempDiv.textContent || tempDiv.innerText || '';
+                                        };
+
+                                        // Extract text from the blog content
+                                        const fullText = extractTextFromHTML(blog.blogContent);
+                                        // Slice the first 100 characters of the text
+                                        const truncatedContent = fullText.length > 100 ?
+                                            fullText.slice(0, 100) + "...Read More" :
+                                            fullText;
 
                                         //Date formating
                                         const addedDate = new Date(blog.addedDate);
@@ -145,15 +158,12 @@ function UserDashboard() {
                                         }
 
 
-                                        <span>{formattedDateWithSuffix}</span>
-
-
                                         return <div key={blog.id} className="col-lg-4 mb-3">
 
                                             <div className="blog-card">
                                                 <div>
                                                     {/* <img src={userImage} alt="Blog" className="blog-card-img" /> */}
-                                                    <img src={BASE_URL + "/BlogImages/" + blog.blogImage} alt="Blog" className="blog-card-img" />
+                                                    {blog.blogImage && <img src={BASE_URL + "/BlogImages/" + blog.blogImage} alt="Blog" className="blog-card-img" />}
                                                     <Link to={"/blog/" + blog.id} className="p-2 text-decoration-none d-block">
                                                         <div className='d-flex justify-content-between'>
                                                             <span className='blog-category'>{blog.category.categoryTitle}</span>
@@ -168,7 +178,7 @@ function UserDashboard() {
                                                     {/* <Link to="/home" className='stretched-link'></Link> */}
                                                 </div>
 
-                                                <Link to={"/user/"+blog.user.id} className="blog-card-auth p-2 text-decoration-none text-dark">
+                                                <Link to={"/user/" + blog.user.id} className="blog-card-auth p-2 text-decoration-none text-dark">
                                                     <div>
                                                         <img src={BASE_URL + "/UserImages/" + blog.user.image} alt="User" />
                                                         {blog.user.name}
