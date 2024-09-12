@@ -77,6 +77,38 @@ font-family: 'Nunito', sans-serif; */
     font-size: 12px;
 }
 
+/* HTML: <div class="loader"></div> */
+.loading {
+    display: inline-grid;
+    padding: 5px;
+    background: #fff;
+    filter: blur(4px) contrast(12);
+}
+
+.loading:before {
+    content: "";
+    height: 40px;
+    aspect-ratio: 3;
+    --c: #0000 64%, #000 66% 98%, #0000 101%;
+    background:
+        radial-gradient(35% 146% at 50% 159%, var(--c)) 0 0,
+        radial-gradient(35% 146% at 50% -59%, var(--c)) 100% 100%;
+    background-size: calc(200%/3) 50%;
+    background-repeat: repeat-x;
+    -webkit-mask: repeating-linear-gradient(90deg, #000 0 10%, #0000 0 20%);
+    animation: l12 .8s infinite linear;
+}
+
+@keyframes l12 {
+    to {
+        background-position: -200% 0, -100% 100%
+    }
+}
+
+
+
+
+
 .loading {
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(151, 149, 149);
@@ -371,13 +403,14 @@ footer a:hover {
     height: 0;
     overflow: hidden;
     opacity: 0;
-    transition: height 0.5s , opacity .2s ease-in;
+    transition: height 0.5s, opacity .2s ease-in;
 }
 
 #nav_search_results.expanded {
     height: auto;
     opacity: 1;
 }
+
 #nav_search_results.collapsed {
     height: 0;
     overflow: hidden;

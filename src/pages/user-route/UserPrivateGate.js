@@ -8,7 +8,7 @@ function UserPrivateGate() {
 
     useEffect(() => {
         if (!isLoggedIn)  {
-            toast.error("You have to be logged in vai.", {
+            toast.error("Access denied! Log in to access this page", {
                 position: "bottom-center",
                 theme: "dark",
             });

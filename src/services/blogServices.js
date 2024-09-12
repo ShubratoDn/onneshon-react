@@ -27,13 +27,30 @@ export const getAllCategories = async ()=>{
 export const addNewBlog = async (data) =>{
 
     let image = data.blogImage;
-
     delete data.blogImage;
 
-    let token  = getToken();    
+    let category = data.categoryTitle;
+    delete data.categoryTitle;
+
+    const newCategory = {
+        category: {
+            categoryTitle: category
+        }
+    };
+
+      // Add the new category data to the existing data object
+      const updatedData = {
+        ...data,
+        ...newCategory
+    };
+
+
+    let token  = getToken();   
+    
+    
 
     const formData = new FormData();
-    formData.append("blogData", JSON.stringify(data));
+    formData.append("blogData", JSON.stringify(updatedData));
     formData.append("blogImage", image)
 
     return await axiosRequest.post("/api/blog", formData,{

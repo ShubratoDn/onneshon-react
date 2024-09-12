@@ -67,7 +67,7 @@ export default function SearchBar() {
     return (
         <NavItem id='search_bar'>
             <InputGroup>
-                <Input name='search_query' placeholder="Search" id='search_field' onChange={handleSearchChange} onFocus={handleSearchFocus} onBlur={handleSearchBlur} />
+                <Input style={{backgroundColor:"transparent", color:"white"}} name='search_query' placeholder="Search" id='search_field' autoComplete='off' onChange={handleSearchChange} onFocus={handleSearchFocus} onBlur={handleSearchBlur} />
                 <Button color="primary">Search</Button>
             </InputGroup>
             {searchResult != null && <ul id='nav_search_results' className={searchExpanded ? 'expanded' : 'collapsed'}>
